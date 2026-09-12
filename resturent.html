@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spice & Soul | Restaurant</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffaf3;
+      color: #292929;
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 7%;
+      background: rgba(20, 20, 20, 0.95);
+    }
+
+    .logo {
+      color: #f5b642;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #f5b642;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+
+      background:
+        linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+        url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(45px, 8vw, 85px);
+      color: #f5b642;
+      margin-bottom: 10px;
+    }
+
+    .hero-content p {
+      font-size: 22px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 28px;
+      background: #e4572e;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: .3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #f5b642;
+      color: #222;
+      transform: translateY(-2px);
+    }
+
+    /* GENERAL */
+    section {
+      padding: 80px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 45px;
+      color: #b63a1e;
+    }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    }
+
+    .about-text h3 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    /* MENU */
+    .menu {
+      background: #fff0d8;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .menu-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+      transition: .3s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .menu-card h3 {
+      color: #b63a1e;
+      font-size: 23px;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      float: right;
+      color: #e4572e;
+      font-weight: bold;
+    }
+
+    /* GALLERY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: .3s;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+    }
+
+    /* RESERVATION */
+    .reservation {
+      background: #242424;
+      color: white;
+    }
+
+    .reservation .section-title {
+      color: #f5b642;
+    }
+
+    form {
+      max-width: 700px;
+      margin: auto;
+      display: grid;
+      gap: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    /* CONTACT */
+    .contact {
+      text-align: center;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+      font-size: 18px;
+    }
+
+    .contact-info div {
+      padding: 15px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+
+    footer span {
+      color: #f5b642;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      nav {
+        padding: 15px 5%;
+      }
+
+      nav ul {
+        gap: 12px;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+
+      .about,
+      .menu-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content p {
+        font-size: 18px;
+      }
+
+      .contact-info {
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">Spice & Soul</div>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reservation">Reserve</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Spice & Soul</h1>
+      <p>Authentic flavors. Warm hospitality. Unforgettable moments.</p>
+      <a href="#reservation" class="btn">Book a Table</a>
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title">About Us</h2>
+
+    <div class="about">
+      <img
+        src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1000&q=80"
+        alt="Restaurant interior"
+      >
+
+      <div class="about-text">
+        <h3>A Taste You'll Remember</h3>
+
+        <p>
+          Welcome to Spice & Soul, where traditional recipes meet modern
+          creativity. Our chefs use fresh ingredients, aromatic spices and
+          time-tested techniques to create food that brings people together.
+        </p>
+
+        <br>
+
+        <p>
+          Whether you're enjoying a romantic dinner, celebrating with family,
+          or meeting friends, we're here to make every meal special.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <h2 class="section-title">Our Menu</h2>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <h3>Butter Chicken <span class="price">₹349</span></h3>
+        <p>Chicken cooked in a rich, creamy tomato and butter sauce.</p>
+      </div>
+
+      <div class="menu-card">
+        <h3>Paneer Tikka <span class="price">₹299</span></h3>
+        <p>Char-grilled paneer with peppers, onions and Indian spices.</p>
+      </div>
+
+      <div class="menu-card">
+        <h3>Biryani <span class="price">₹329</span></h3>
+        <p>Fragrant basmati rice layered with aromatic spices and herbs.</p>
+      </div>
+
+      <div class="menu-card">
+        <h3>Dal Makhani <span class="price">₹249</span></h3>
+        <p>Slow-cooked black lentils finished with butter and cream.</p>
+      </div>
+
+      <div class="menu-card">
+        <h3>Garlic Naan <span class="price">₹89</span></h3>
+        <p>Freshly baked naan topped with garlic, coriander and butter.</p>
+      </div>
+
+      <div class="menu-card">
+        <h3>Gulab Jamun <span class="price">₹129</span></h3>
+        <p>Soft milk dumplings served warm in sweet aromatic syrup.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <h2 class="section-title">Food Gallery</h2>
+
+    <div class="gallery-grid">
+
+      <img
+        src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
+        alt="Indian food"
+      >
+
+      <img
+        src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=800&q=80"
+        alt="Indian curry"
+      >
+
+      <img
+        src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=80"
+        alt="Restaurant dish"
+      >
+
+      <img
+        src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
+        alt="Healthy food"
+      >
+
+      <img
+        src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80"
+        alt="Restaurant"
+      >
+
+      <img
+        src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80"
+        alt="Dining area"
+      >
+
+    </div>
+  </section>
+
+
+  <!-- RESERVATION -->
+  <section class="reservation" id="reservation">
+    <h2 class="section-title">Reserve a Table</h2>
+
+    <form id="bookingForm">
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Your Name"
+        required
+      >
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Your Email"
+        required
+      >
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="Phone Number"
+        required
+      >
+
+      <input
+        type="date"
+        id="date"
+        required
+      >
+
+      <select id="guests" required>
+        <option value="">Number of Guests</option>
+        <option>1 Guest</option>
+        <option>2 Guests</option>
+        <option>3 Guests</option>
+        <option>4 Guests</option>
+        <option>5 Guests</option>
+        <option>6+ Guests</option>
+      </select>
+
+      <textarea
+        id="message"
+        placeholder="Special requests..."
+      ></textarea>
+
+      <button class="btn" type="submit">
+        Confirm Reservation
+      </button>
+
+    </form>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2 class="section-title">Contact Us</h2>
+
+    <div class="contact-info">
+      <div>
+        📍 Main Street, New Delhi
+      </div>
+
+      <div>
+        📞 +91 98765 43210
+      </div>
+
+      <div>
+        ✉️ hello@spiceandsoul.com
+      </div>
+
+      <div>
+        🕐 11:00 AM – 11:00 PM
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      © 2026 <span>Spice & Soul</span>. All Rights Reserved.
+    </p>
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const form = document.getElementById("bookingForm");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const date = document.getElementById("date").value;
+      const guests = document.getElementById("guests").value;
+
+      alert(
+        "Thank you, " + name +
+        "! Your table request for " +
+        guests + " on " + date +
+        " has been received."
+      );
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
